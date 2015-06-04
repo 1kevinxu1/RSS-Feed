@@ -1,0 +1,7 @@
+<% entries.each(function(entry) { %>
+  <a href=<%= entry.escape("link") %> >
+    <li class="list-group-item">
+      <%= entry.escape("title") %>
+    </li>
+  </a>
+<% }); %>
