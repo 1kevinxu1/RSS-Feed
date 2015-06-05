@@ -1,5 +1,15 @@
-<div class="container row page">
+<nav class="navbar navbar-default">
+  <form class="navbar-form" action="index.html" method="post">
+    <label for="username">Username: </label>
+    <input class="form-control" type="text" id="username" name="name" value="">
 
+    <label for="password">Password: </label>
+    <input class="form-control" type="password" id="username" name="name" value="">
+    <button id="log-in" class="btn btn-default">Submit</button>
+  </form>
+</nav>
+
+<div class="container row page">
   <div id='sidebar' class="col-xs-3">
     <div id="sidebar-header" class="row title">
       <h1>Active Feeds</h1>
@@ -7,8 +17,6 @@
     <div id="sidebar-content" class="row">
     </div>
   </div>
-
-
   <div id='main' class="col-xs-9">
     <div id="main-header" class="row title">
       <h1> Current Feed: </h1>
@@ -16,8 +24,5 @@
     <div id="main-content" class="row">
     </div>
   </div>
-
 </div>
-
-
 <script></script>

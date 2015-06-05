@@ -1,7 +1,0 @@
-<% feeds.each(function(feed) { %>
-  <a href="#/feeds/<%= feed.id %>">
-    <li class="list-group-item" data-id=<%=feed.get("id")%> >
-      <%= feed.escape("title") %>
-    </li>
-  </a>
-<% }); %>
