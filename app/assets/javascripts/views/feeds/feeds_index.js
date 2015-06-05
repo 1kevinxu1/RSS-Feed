@@ -1,4 +1,4 @@
-NewsReader.Views.FeedsIndex = Backbone.View.extend({
+NewsReader.Views.FeedsIndex = Backbone.CompositeView.extend({
 
   template: JST['feeds/index'],
 
@@ -6,15 +6,13 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
 
   className: 'list-group',
 
-  // events: {
-  //   "click li": "selectFeed"
-  // },
-
-  initialize: function() {
+  initialize: function(options) {
     this.listenTo(this.collection, "sync", this.render);
+    this.selectedFeed = NewsReader.feedsRouter.selectedFeed;
   },
 
   render: function() {
+    debugger;
     var content = this.template({ feeds: this.collection });
     this.$el.html(content);
     var that = this;
@@ -30,14 +28,4 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
 
     return this;
   },
-
-  // selectFeed: function(event) {
-  //   event.preventDefault();
-  //   $("div#sidebar-content li").removeClass("selected");
-  //   var $currentTarget = $(event.currentTarget);
-  //   NewsReader.feedsRouter.feedShow($currentTarget.data("id"));
-  //   $currentTarget.addClass("selected");
-  //   return;
-  // }
-
 });

@@ -5,7 +5,7 @@ NewsReader.Views.FeedsIndexItem = Backbone.View.extend({
   tagName: 'a',
 
   events: {
-
+    'click li': "selectFeed"
   },
 
   initialize: function () {
@@ -21,4 +21,9 @@ NewsReader.Views.FeedsIndexItem = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
+
+  selectFeed: function(event) {
+    var $currentTarget = $(event.currentTarget);
+    $currentTarget.addClass("selected");
+  }
 });

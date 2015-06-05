@@ -11,23 +11,28 @@ NewsReader.Routers.Feeds = Backbone.Router.extend({
     this.$sidebar = options.$sidebar;
   },
 
-  feedIndex: function() {
-    debugger;
+  feedIndex: function(callback) {
     this._feeds.fetch({
       reset: true,
       success: function() {
         this.feedShow(this._feeds.first());
+        callback && callback();
       }.bind(this)
     });
-    this.feedIndexView = new NewsReader.Views.FeedsIndex({ collection: this._feeds });
+
+    this.feedIndexView = new NewsReader.Views.FeedsIndex({
+      collection: this._feeds,
+    });
     this._swapView(this.feedIndexView, this.sidebarView, this.$sidebar);
   },
 
   feedShow: function(id) {
-    var thisFeed = this._feeds.getOrFetch(id);
-    var feedShowView = new NewsReader.Views.FeedShow({ model: thisFeed });
+    if (this._feeds.length === 0) {
+      this.feedIndex(this.feedShow.bind(this, id));
+    }
+    this.selectedFeed = this._feeds.getOrFetch(id);
+    var feedShowView = new NewsReader.Views.FeedShow({ model: this.selectedFeed });
     this._swapView(feedShowView, this.mainView, this.$main);
-    // this.selectFeed(id);
   },
 
   _swapView: function(newView, currentView, $el) {

@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require underscore
 //= require backbone
+//= require composite_view
 //= require news_reader
 //= require_tree ../templates
 //= require_tree ./models
