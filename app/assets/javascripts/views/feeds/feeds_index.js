@@ -2,30 +2,42 @@ NewsReader.Views.FeedsIndex = Backbone.CompositeView.extend({
 
   template: JST['feeds/index'],
 
-  tagName: 'ul',
+  tagName: 'div',
 
-  className: 'list-group',
+  className: 'something-content',
 
-  initialize: function(options) {
-    this.listenTo(this.collection, "sync", this.render);
-    this.selectedFeed = NewsReader.feedsRouter.selectedFeed;
+  initialize: function() {
+    this.listenTo(this.collection, "add", this.addFeedIndexItemView);
+    this.collection.each(this.addFeedIndexItemView.bind(this));
   },
 
   render: function() {
-    debugger;
     var content = this.template({ feeds: this.collection });
     this.$el.html(content);
-    var that = this;
-    this.collection.each(function(feed) {
-      var view = new NewsReader.Views.FeedsIndexItem({
-        model: feed,
-        attributes: {
-          href: "/#feeds/" + feed.id
-        }
-      });
-      that.$el.append(view.render().$el);
-    });
-
+    this.attachSubviews();
     return this;
   },
+
+  addFeedIndexItemView: function (feedIndexItem) {
+    var subview = new NewsReader.Views.FeedsIndexItem({
+      model: feedIndexItem,
+      attributes: {
+        href: "/#feeds/" + feedIndexItem.id,
+      }
+    });
+    this.addSubview('ul.list-group', subview);
+  },
+
+  selectFeed: function(id) {
+    this.subviews('ul.list-group').each(function(view) {
+      view.model.set({selected: false});
+      if (view.model.id === parseInt(id)) {
+        view.model.set({selected: true});
+      }
+      view.render();
+    });
+    this.render();
+
+    return;
+  }
 });

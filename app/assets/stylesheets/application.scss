@@ -24,5 +24,13 @@
 }
 
 .selected{
-  background-color: #eee
+  background-color: #ddd;
+}
+
+.list-group-item:hover {
+  background-color: #eee;
+}
+
+.list-group-item:active {
+  background-color: #ccc;
 }

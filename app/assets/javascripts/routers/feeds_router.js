@@ -13,9 +13,8 @@ NewsReader.Routers.Feeds = Backbone.Router.extend({
 
   feedIndex: function(callback) {
     this._feeds.fetch({
-      reset: true,
       success: function() {
-        this.feedShow(this._feeds.first());
+        this.feedShow(this._feeds.first().id);
         callback && callback();
       }.bind(this)
     });
@@ -31,8 +30,9 @@ NewsReader.Routers.Feeds = Backbone.Router.extend({
       this.feedIndex(this.feedShow.bind(this, id));
     }
     this.selectedFeed = this._feeds.getOrFetch(id);
-    var feedShowView = new NewsReader.Views.FeedShow({ model: this.selectedFeed });
-    this._swapView(feedShowView, this.mainView, this.$main);
+    this.feedShowView = new NewsReader.Views.FeedShow({ model: this.selectedFeed });
+    this._swapView(this.feedShowView, this.mainView, this.$main);
+    this.feedIndexView.selectFeed(id);
   },
 
   _swapView: function(newView, currentView, $el) {

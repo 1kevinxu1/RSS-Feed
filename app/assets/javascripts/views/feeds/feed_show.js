@@ -4,10 +4,6 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
 
   tagName: 'ul',
 
-  events: {
-    "click li": "selectEntry"
-  },
-
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
   },
@@ -17,10 +13,5 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
-
-  selectEntry: function(event) {
-    $(event.currentTarget).addClass("selected");
-    return;
-  }
 
 });

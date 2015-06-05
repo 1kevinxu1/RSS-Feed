@@ -1,3 +1,7 @@
-<li class='list-group-item'>
+<li class='list-group-item
+  <% if (feed.get("selected")) { %>
+    selected
+  <% } %>
+'>
   <%= feed.escape("title") %>
 </li>
