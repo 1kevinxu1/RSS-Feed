@@ -1,6 +1,6 @@
 class Api::FeedsController < ApplicationController
   def index
-    render :json => Feed.all
+    render :json => Feed.all.order(:id)
   end
 
   def show

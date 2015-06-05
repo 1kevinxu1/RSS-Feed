@@ -18,6 +18,10 @@ NewsReader.Collections.Feeds = Backbone.Collection.extend({
     }
 
     return feed;
+  },
+
+  comparator: function(model) {
+    return model.get("id");
   }
 
 });
